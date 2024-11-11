@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    container_name: db
+    environment:
+      - DATABASE_HOST=127.0.0.1
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_USER=dcarbajal
+    ports:
+      - "5432:5432"
+    volumes:
+      - local_pgdata:/var/lib/postgresql/data
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: roger.sobrino@xtec.cat
+      PGADMIN_DEFAULT_PASSWORD: roger123
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+volumes:
+  local_pgdata:
+  pgadmin-data:
